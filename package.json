@@ -5,16 +5,16 @@
   "author": "David Hoeck <d.hoeck@alpin11.com>",
   "license": "GPLv3",
   "description": "Resolve relations more than 2 levels deep",
-  "main": "./dist/storyblok-deep-relations-resolver.js",
-  "module": "./dist/storyblok-deep-relations-resolver.mjs",
-  "types": "./dist/types/index.d.ts",
+  "main": "dist/@alpin11/storyblok-deep-relations-resolver.js",
+  "module": "dist/@alpin11/storyblok-deep-relations-resolver.mjs",
+  "types": "dist/types/index.d.ts",
   "files": [
     "dist"
   ],
   "exports": {
     ".": {
-      "import": "./dist/storyblok-deep-relations-resolver.mjs",
-      "require": "./dist/storyblok-deep-relations-resolver.js"
+      "import": "./dist/@alpin11/storyblok-deep-relations-resolver.mjs",
+      "require": "./dist/@alpin11/storyblok-deep-relations-resolver.js"
     }
   },
   "scripts": {
