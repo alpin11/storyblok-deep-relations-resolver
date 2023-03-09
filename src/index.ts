@@ -4,7 +4,7 @@ interface Component {
   [key: string]: string | any | Component
 }
 
-export const resolveRelationsDeep = async(apiClient: StoryblokClient,data: Component, uuidArrays: string[], params?: ISbStoriesParams) => {
+export const resolveRelationsDeep = async(apiClient: StoryblokClient, data: Component, uuidArrays: string[], params?: ISbStoriesParams) => {
   for (const uuidArray of uuidArrays) {
     const [component, field] = uuidArray.split('.')
     const components: Component[] = searchComponents(component, data)
