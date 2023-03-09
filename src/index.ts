@@ -14,10 +14,10 @@ export const resolveRelationsDeep = async(data: Component, uuidArrays: string[],
       if (Array.isArray(value)) {
         // Replace UUID array with parsed object array
         componentData[field] = await Promise.all(value.map(async (uuid) => {
-          return await parseUUID(uuid)
+          return await loadDataForUUID(uuid)
         }))
       } else if (typeof value === 'string') {
-        componentData[field] = await parseUUID(value)
+        componentData[field] = await loadDataForUUID(value)
       } else if (typeof value === 'object') {
         // Recursively search for UUIDs in child components
         resolveRelationsDeep(value as Component, uuidArrays)
@@ -43,7 +43,7 @@ const searchComponents = (componentName: string, data?: Component): Component[] 
 }
 
 // TODO: make configurable
-const parseUUID = async (uuid: string, params?: ISbStoriesParams) => {
+const loadDataForUUID = async (uuid: string, params?: ISbStoriesParams) => {
   const storyblokApi = getStoryblokApi()
 
   const { data } = await storyblokApi.get('cdn/stories', {
