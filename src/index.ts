@@ -1,10 +1,10 @@
-import { getStoryblokApi, ISbStoriesParams } from '@storyblok/react'
+import { ISbStoriesParams, StoryblokClient } from '@storyblok/react'
 
 interface Component {
   [key: string]: string | any | Component
 }
 
-export const resolveRelationsDeep = async(data: Component, uuidArrays: string[], params?: ISbStoriesParams) => {
+export const resolveRelationsDeep = async(apiClient: StoryblokClient,data: Component, uuidArrays: string[], params?: ISbStoriesParams) => {
   for (const uuidArray of uuidArrays) {
     const [component, field] = uuidArray.split('.')
     const components: Component[] = searchComponents(component, data)
@@ -14,13 +14,13 @@ export const resolveRelationsDeep = async(data: Component, uuidArrays: string[],
       if (Array.isArray(value)) {
         // Replace UUID array with parsed object array
         componentData[field] = await Promise.all(value.map(async (uuid) => {
-          return await loadDataForUUID(uuid)
+          return await loadDataForUUID(apiClient, uuid)
         }))
       } else if (typeof value === 'string') {
-        componentData[field] = await loadDataForUUID(value)
+        componentData[field] = await loadDataForUUID(apiClient, value)
       } else if (typeof value === 'object') {
         // Recursively search for UUIDs in child components
-        resolveRelationsDeep(value as Component, uuidArrays)
+        resolveRelationsDeep(apiClient, value as Component, uuidArrays)
       }
     }
   }
@@ -43,10 +43,8 @@ const searchComponents = (componentName: string, data?: Component): Component[] 
 }
 
 // TODO: make configurable
-const loadDataForUUID = async (uuid: string, params?: ISbStoriesParams) => {
-  const storyblokApi = getStoryblokApi()
-
-  const { data } = await storyblokApi.get('cdn/stories', {
+const loadDataForUUID = async (apiClient: StoryblokClient, uuid: string, params?: ISbStoriesParams) => {
+  const { data } = await apiClient.get('cdn/stories', {
     ...params,
     ...{
       by_uuids: uuid,
