@@ -11,32 +11,22 @@ jobs:
       contents: write
       packages: write
     steps:
-    - uses: actions/checkout@v3
-    - name: Setup NodeJS
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        registry-url: 'https://npm.pkg.github.com'
-        scope: '@alpin11'
-    - name: Install Yarn
-      run: npm install -g yarn
-    - name: Install modules
-      run: yarn install --frozen-lockfile
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Build
-      run: yarn build
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-    - name: Patch version
-      run: |
-        git config user.name ALPIN11
-        git config user.email devs@alpin11.com
-        git pull
-        yarn version --patch
-        git push
-    - name: Publish
-      run: yarn publish 
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Install Yarn
+        run: npm install -g yarn
+      - name: Install modules
+        run: yarn install --frozen-lockfile
+      - name: Patch version
+        run: |
+          git config user.name Alpin11
+          git config user.email devs@alpin11.com
+          git pull
+          yarn version --patch
+          git push
+      - uses: JS-DevTools/npm-publish@v2
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          access: public
