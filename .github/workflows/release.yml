@@ -1,8 +1,7 @@
 name: release package
+
 on:
-  push:
-    branches:
-      - main
+    - pull_request
 
 jobs:
   release-package:
