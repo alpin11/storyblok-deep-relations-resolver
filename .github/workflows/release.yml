@@ -5,7 +5,7 @@ on:
 
 jobs:
   release-package:
-    runs-on: [ self-hosted-hetzner ]
+    runs-on: self-hosted-hetzner
     permissions:
       contents: write
       packages: write
