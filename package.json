@@ -33,6 +33,7 @@
     "react-dom": "^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
+    "@alpin11/eslint-config": "^0.2.34",
     "@tsconfig/recommended": "^1.0.2",
     "path": "^0.12.7",
     "vite": "^4.1.4"

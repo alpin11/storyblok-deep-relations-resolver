@@ -1,6 +1,6 @@
-import { ISbStoriesParams } from '@storyblok/react';
-interface Component {
-    [key: string]: string | any | Component;
+import { ISbStoriesParams, StoryblokClient } from '@storyblok/react';
+interface StoryComponent {
+    [key: string]: string | any | StoryComponent;
 }
-export declare const resolveRelationsDeep: (data: Component, uuidArrays: string[], params?: ISbStoriesParams) => Promise<Component>;
+export declare const resolveRelationsDeep: (apiClient: StoryblokClient, data: StoryComponent, uuidArrays: string[], params?: ISbStoriesParams, loadDataForUUIDCallback?: (uuid: string, params?: ISbStoriesParams) => StoryComponent) => Promise<StoryComponent>;
 export {};

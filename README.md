@@ -45,7 +45,7 @@ If you would like to contribute to the project, please follow these steps:
 - Submit a pull request
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the GPLv3 License.
 
 ## Reporting Bugs
 If you find any bugs or issues with the package, please report them by creating a new issue on the GitHub issue tracker.

@@ -1,9 +1,10 @@
 {
-    "eslint.runtime": "node",
-    "editor.tabSize": 2,
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": true,
-      "source.fixAll.stylelint": true,
-      "source.organizeImports": true
-    }
-  }
+  "eslint.runtime": "node",
+  "editor.tabSize": 2,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true,
+    "source.organizeImports": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
