@@ -1,4 +1,5 @@
 name: release package
+
 on:
   push:
     branches:
@@ -21,7 +22,7 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Patch version
         run: |
-          git config user.name Alpin11
+          git config user.name ALPIN11
           git config user.email devs@alpin11.com
           git pull
           yarn version --patch
