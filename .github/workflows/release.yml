@@ -1,5 +1,4 @@
 name: release package
-
 on:
   push:
     branches:
@@ -7,7 +6,7 @@ on:
 
 jobs:
   release-package:
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     permissions:
       contents: write
       packages: write
