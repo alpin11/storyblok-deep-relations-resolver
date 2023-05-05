@@ -6,7 +6,7 @@ on:
 
 jobs:
   release-package:
-    runs-on: ubuntu-latest
+    runs-on: [ self-hosted-hetzner ]
     permissions:
       contents: write
       packages: write
@@ -19,14 +19,3 @@ jobs:
         run: npm install -g yarn
       - name: Install modules
         run: yarn install --frozen-lockfile
-      - name: Patch version
-        run: |
-          git config user.name ALPIN11
-          git config user.email devs@alpin11.com
-          git pull
-          yarn version --patch
-          git push
-      - uses: JS-DevTools/npm-publish@v2
-        with:
-          token: ${{ secrets.NPM_TOKEN }}
-          access: public
