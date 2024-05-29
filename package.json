@@ -1,7 +1,9 @@
 {
   "name": "@alpin11/storyblok-deep-relations-resolver",
   "version": "2.0.0",
-  "repository": "https://github.com/alpin11/storyblok-storyblok-deep-relations-resolver",
+  "repository": {
+    "url": "https://github.com/alpin11/storyblok-storyblok-deep-relations-resolver"
+  },
   "author": "David Hoeck <d.hoeck@alpin11.com>",
   "license": "GPLv3",
   "description": "Resolve relations more than 2 levels deep",
