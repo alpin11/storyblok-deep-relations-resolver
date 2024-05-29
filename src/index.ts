@@ -1,14 +1,16 @@
-import { ISbStoriesParams, StoryblokClient } from '@storyblok/react'
+import type { ISbStoriesParams, StoryblokClient } from '@storyblok/react/rsc'
+import type { ISbCustomFetch } from 'storyblok-js-client'
 
 interface StoryComponent {
   [key: string]: string | any | StoryComponent
 }
 
-export const resolveRelationsDeep = async(
-  apiClient: StoryblokClient, 
-  data: StoryComponent, 
-  uuidArrays: string[], 
-  params?: ISbStoriesParams, 
+export const resolveRelationsDeep = async (
+  apiClient: StoryblokClient,
+  data: StoryComponent,
+  uuidArrays: string[],
+  params?: ISbStoriesParams,
+  fetchOptions?: ISbCustomFetch,
   loadDataForUUIDCallback?: (uuid: string, params?: ISbStoriesParams) => StoryComponent) => {
   for (const uuidArray of uuidArrays) {
     const [component, field] = uuidArray.split('.')
@@ -18,14 +20,14 @@ export const resolveRelationsDeep = async(
       const value = componentData[field]
       if (Array.isArray(value)) {
         // Replace UUID array with parsed object array
-        componentData[field] = await Promise.all(value.map(async (uuid) => {
-          return await loadDataForUUID(apiClient, uuid)
+        componentData[field] = await Promise.all(value.map(async (uuid: string) => {
+          return await loadDataForUUID(apiClient, uuid, params, fetchOptions)
         }))
       } else if (typeof value === 'string') {
-        componentData[field] = await loadDataForUUID(apiClient, value, params, loadDataForUUIDCallback)
+        componentData[field] = await loadDataForUUID(apiClient, value, params, fetchOptions, loadDataForUUIDCallback)
       } else if (typeof value === 'object') {
         // Recursively search for UUIDs in child components
-        resolveRelationsDeep(apiClient, value as StoryComponent, uuidArrays)
+        await resolveRelationsDeep(apiClient, value as StoryComponent, uuidArrays)
       }
     }
   }
@@ -35,7 +37,9 @@ export const resolveRelationsDeep = async(
 
 const searchStorys = (componentName: string, data?: StoryComponent): StoryComponent[] => {
   const components: StoryComponent[] = []
-  data = data ?? {}
+  if (!data) {
+    return []
+  }
   if (data.component === componentName) {
     components.push(data)
   }
@@ -47,17 +51,17 @@ const searchStorys = (componentName: string, data?: StoryComponent): StoryCompon
   return components
 }
 
-const loadDataForUUID = async (apiClient: StoryblokClient, uuid: string, params?: ISbStoriesParams, callback?: (uuid: string, params?: ISbStoriesParams) => StoryComponent) => {
-  if(callback){
+const loadDataForUUID = async (apiClient: StoryblokClient, uuid: string, params?: ISbStoriesParams, fetchOptions?: ISbCustomFetch, callback?: (uuid: string, params?: ISbStoriesParams) => StoryComponent) => {
+  if (callback !== undefined) {
     return callback(uuid, params)
   }
-  
+
   const { data } = await apiClient.get('cdn/stories', {
     ...params,
     ...{
       by_uuids: uuid,
-    }
-  })
+    },
+  }, fetchOptions)
 
   return data.stories.at(0) ?? uuid
 }

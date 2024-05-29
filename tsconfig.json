@@ -7,6 +7,8 @@
     "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
+    "moduleResolution": "NodeNext",
+    "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "declarationDir": "dist/types",
