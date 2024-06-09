@@ -1,15 +1,14 @@
 {
   "name": "@alpin11/storyblok-deep-relations-resolver",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "repository": {
     "url": "git+https://github.com/alpin11/storyblok-storyblok-deep-relations-resolver.git"
   },
   "author": "David Hoeck <d.hoeck@alpin11.com>",
   "license": "GPLv3",
   "description": "Resolve relations more than 2 levels deep",
-  "main": "dist/@alpin11/storyblok-deep-relations-resolver.js",
   "module": "dist/@alpin11/storyblok-deep-relations-resolver.mjs",
-  "types": "dist/types/index.d.ts",
+  "types": "dist/index.d.ts",
   "packageManager": "pnpm@8.15.6",
   "files": [
     "dist"
@@ -36,7 +35,9 @@
   "devDependencies": {
     "@alpin11/eslint-config": "^0.5.0",
     "@tsconfig/recommended": "^1.0.2",
+    "@types/node": "^20.14.2",
     "path": "^0.12.7",
-    "vite": "^4.1.4"
+    "vite": "^5.2",
+    "vite-plugin-dts": "^3.9.1"
   }
 }
