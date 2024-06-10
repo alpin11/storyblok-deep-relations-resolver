@@ -20,7 +20,7 @@
     }
   },
   "scripts": {
-    "build": "vite build && tsc --project tsconfig.json"
+    "build": "vite build"
   },
   "release": {
     "branches": [

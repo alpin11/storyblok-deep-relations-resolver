@@ -17,6 +17,6 @@
   "extends": "@tsconfig/recommended/tsconfig.json",
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Recommended",
-  "include": ["./src/index.ts"],
+  "include": ["src", "dist"],
   "exclude": ["node_modules"]
 }
