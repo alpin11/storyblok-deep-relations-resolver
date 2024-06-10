@@ -1,6 +1,6 @@
 {
   "name": "@alpin11/storyblok-deep-relations-resolver",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "repository": {
     "url": "git+https://github.com/alpin11/storyblok-storyblok-deep-relations-resolver.git"
   },
@@ -16,8 +16,9 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/@alpin11/storyblok-deep-relations-resolver.mjs",
-      "require": "./dist/@alpin11/storyblok-deep-relations-resolver.js"
+      "types": "./dist/index.d.ts",
+      "import":  "./dist/index.mjs",
+      "require":  "./dist/index.js"
     }
   },
   "scripts": {
