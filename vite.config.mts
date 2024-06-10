@@ -6,9 +6,9 @@ export default defineConfig({
   build: {
     lib: {
       entry: "src/index.ts",
-      name: "storyblokResolveRelationsDeep",
+      name: "index",
       formats: ['es', 'cjs'],
-      fileName: libName,
+      fileName: 'index',
     }
   },
   plugins: [dts()],
